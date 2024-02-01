@@ -1,0 +1,10 @@
+[
+  {
+    "processPattern":"Msiexec.exe",
+    "execActionMask":130,
+    "recommendation": "This publisher is recommended to be Unapproved",
+    "platformFlags": 1,
+    "Impact": "Medium",
+    "Severity": ""
+  }
+]

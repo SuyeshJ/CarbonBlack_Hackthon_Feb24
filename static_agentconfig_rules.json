@@ -1,0 +1,8 @@
+[
+  {"name":"kernelProcessExclusions",
+    "recommendation": "",
+    "platformFlags": 1,
+    "Impact": "Medium",
+    "Severity": ""
+  }
+]

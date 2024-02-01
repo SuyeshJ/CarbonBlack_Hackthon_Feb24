@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "dynamic_rule_name": "Bit9, Inc.",
+        "rule_type": "Publisher",
+        "Impact": "Medium",
+        "recommendation": "This publisher is recommended to be Unapproved",
+        "severity": ""
+    },
+    {
+        "id": 2,
+        "dynamic_rule_name": "Bit9, Inc",
+        "rule_type": "Publisher",
+        "Impact": "Medium",
+        "recommendation": "This publisher is recommended to be Unapproved",
+        "severity": ""
+    }
+]

@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1089,
+        "dynamic_rule_name": "msiexec",
+        "rule_type": "Custom",
+        "Impact": "Medium",
+        "recommendation": "It is recommended for execActionMask to be 130",
+        "severity": "",
+        "matched_path_process": "",
+        "file": ""
+    }
+]
