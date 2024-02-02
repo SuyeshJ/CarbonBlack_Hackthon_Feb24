@@ -107,7 +107,7 @@ def analyze_rules(dynamic_rules, static_rules, rule_type):
             # See if the rule in dynamic rules dataset has an entry in static rule dataset
             match, matched_path_process = is_match(dynamic_rule, static_rule, rule_type)
             if match:
-                # Check if the found rule is having behaviour as recommended 
+                # Check if the found rule is having behaviour as recommended
                 conflict_found, recommendation = is_conflict(dynamic_rule, static_rule, rule_type)
 
                 # Append the conflicting rule details to a report

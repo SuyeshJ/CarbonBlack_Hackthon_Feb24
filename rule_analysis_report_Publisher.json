@@ -4,15 +4,19 @@
         "dynamic_rule_name": "Bit9, Inc.",
         "rule_type": "Publisher",
         "Impact": "Medium",
-        "recommendation": "This publisher is recommended to be Unapproved",
-        "severity": ""
+        "recommendation": "This publisher is recommended to be Approved",
+        "severity": "",
+        "matched_path_process": "",
+        "file": ""
     },
     {
         "id": 2,
         "dynamic_rule_name": "Bit9, Inc",
         "rule_type": "Publisher",
         "Impact": "Medium",
-        "recommendation": "This publisher is recommended to be Unapproved",
-        "severity": ""
+        "recommendation": "This publisher is recommended to be Approved",
+        "severity": "",
+        "matched_path_process": "",
+        "file": ""
     }
 ]
