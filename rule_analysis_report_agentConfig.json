@@ -1,12 +1,13 @@
 [
     {
         "id": 145,
-        "dynamic_rule_name": "kernelProcessExclusions",
+        "rule_name": "kernelProcessExclusions",
         "rule_type": "agentConfig",
         "Impact": "Medium",
         "recommendation": "It is not recommend to exclude cmd.exe:99696 from tracking",
-        "severity": "",
-        "matched_path_process": "",
+        "severity": "Warning",
+        "processPattern": "",
+        "pathPattern": "",
         "file": ""
     }
 ]

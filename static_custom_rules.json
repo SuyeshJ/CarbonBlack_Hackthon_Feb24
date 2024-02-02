@@ -1,10 +1,27 @@
 [
   {
     "processPattern":"Msiexec.exe",
-    "execActionMask":130,
+    "execActionMask":129,
+    "ruleAction":"Allow execute",
     "recommendation": "This publisher is recommended to be Unapproved",
     "platformFlags": 1,
     "Impact": "Medium",
-    "Severity": ""
+    "Severity": "Warning"
+  },
+  {
+    "processPattern":"Msiexec.exe",
+    "ruleAction":"Allow execute",
+    "recommendation": "This publisher is recommended to be Blocked",
+    "platformFlags": 1,
+    "Impact": "Medium",
+    "Severity": "Warning"
+  },
+  {
+    "pathPattern":"ntvdm.exe",
+    "ruleAction":"Block execute",
+    "recommendation": "This publisher is recommended to be Blocked",
+    "platformFlags": 1,
+    "Impact": "Low",
+    "Severity": "Info"
   }
 ]

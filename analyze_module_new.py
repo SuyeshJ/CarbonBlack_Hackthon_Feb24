@@ -18,20 +18,18 @@ def is_match(dynamic_rule, static_rule, rule_type):
         dynamic_process_pattern = dynamic_rule.get('processPattern', '').lower()
         static_process_pattern = static_rule.get('processPattern', '').lower()
         dynamic_path_pattern = dynamic_rule.get('pathPattern', '').lower()
-        static_path_processes = static_rule.get('pathProcess', [])
+        static_path_pattern = static_rule.get('pathPattern', [])
 
-        if dynamic_process_pattern != ("*" or None) and dynamic_path_pattern != ("*" or None):
+        if dynamic_process_pattern != ("*" or None) and dynamic_path_pattern != ("*" or None) and static_process_pattern and static_path_pattern:
             if static_process_pattern in dynamic_process_pattern or dynamic_process_pattern in static_process_pattern:
-                for path in static_path_processes:
-                    if path.lower() in dynamic_path_pattern:
-                        return True, path
-        elif dynamic_process_pattern != ("*" or None):
+                if static_path_pattern in dynamic_path_pattern or dynamic_path_pattern in static_path_pattern:
+                    return True, static_process_pattern, static_path_pattern
+        elif dynamic_process_pattern != ("*" or None) and static_process_pattern:
             if static_process_pattern in dynamic_process_pattern or dynamic_process_pattern in static_process_pattern:
-                return True, None
-        elif dynamic_path_pattern != ("*" or None):
-            for path in static_path_processes:
-                if path.lower() in dynamic_path_pattern or dynamic_path_pattern in path.lower():
-                    return True, static_path_processes
+                return True, static_process_pattern, None
+        elif dynamic_path_pattern != ("*" or None) and static_path_pattern:
+            if static_path_pattern in dynamic_path_pattern or dynamic_path_pattern in static_path_pattern:
+                return True, None, static_path_pattern
 
     elif rule_type == 'File':
         dynamic_file_name = dynamic_rule.get('fileName', '').lower()
@@ -39,23 +37,21 @@ def is_match(dynamic_rule, static_rule, rule_type):
         dynamic_file_hash = dynamic_rule.get('hash', '').lower()
         static_file_hash = static_rule.get('hash', '').lower()
         if dynamic_file_name == static_file_name or dynamic_file_hash == static_file_hash:
-            return True
-        else:
-            None
+            return True, None, None
 
     elif rule_type == 'Publisher':
         dynamic_publisher_name = dynamic_rule.get('name', '').lower()
         static_publisher_name = static_rule.get('name', '').lower()
         if static_publisher_name in dynamic_publisher_name or dynamic_publisher_name in static_publisher_name:
-            return True, None
+            return True, None, None
 
     elif rule_type == 'agentConfig':
         dynamic_config_name = dynamic_rule.get('name', '').lower()
         static_config_name = static_rule.get('name', '').lower()
         if dynamic_config_name == static_config_name:
-            return True, None
+            return True, None, None
 
-    return False, None
+    return False, None, None
 
 
 def is_conflict(dynamic_rule, static_rule, rule_type):
@@ -63,7 +59,7 @@ def is_conflict(dynamic_rule, static_rule, rule_type):
         dynamic_action_mask = dynamic_rule.get('execActionMask')
         static_action_mask = static_rule.get('execActionMask')
         dynamic_action = dynamic_rule.get('ruleAction', '')
-        static_action = static_rule.get('rule_action', '')
+        static_action = static_rule.get('ruleAction', '')
 
         if static_action_mask and static_action:
             if dynamic_action_mask != static_action_mask and dynamic_action != static_action:
@@ -85,11 +81,19 @@ def is_conflict(dynamic_rule, static_rule, rule_type):
     elif rule_type == 'File':
         recommendation = static_rule.get('recommendation', '')
         if dynamic_rule.get('fileState') != static_rule.get('fileState'):
+            if dynamic_rule.get('fileState') == 3 and static_rule.get('fileState') == 2:
+                recommendation = 'It is recommended not to ban this file'
+            elif dynamic_rule.get('fileState') == 2 and static_rule.get('fileState') == 3:
+                recommendation = 'It is recommended not to approve this file'
             return True, recommendation
 
     elif rule_type == 'Publisher':
         recommendation = static_rule.get('recommendation', '')
         if dynamic_rule.get('publisherState') != static_rule.get('publisherState'):
+            if dynamic_rule.get('publisherState') == 3 and static_rule.get('publisherState') == 2:
+                recommendation = 'It is recommended not to ban this Publisher'
+            elif dynamic_rule.get('publisherState') == 2 and static_rule.get('publisherState') == 3:
+                recommendation = 'It is recommended not to approve this Publisher'
             return True, recommendation
 
     elif rule_type == 'agentConfig':
@@ -103,36 +107,58 @@ def analyze_rules(dynamic_rules, static_rules, rule_type):
     report = []
     for dynamic_rule in dynamic_rules:
         rule_id = dynamic_rule.get('id', 'Unknown')
-        for static_rule in static_rules:
-            # See if the rule in dynamic rules dataset has an entry in static rule dataset
-            match, matched_path_process = is_match(dynamic_rule, static_rule, rule_type)
-            if match:
-                # Check if the found rule is having behaviour as recommended
-                conflict_found, recommendation = is_conflict(dynamic_rule, static_rule, rule_type)
+        # checking if we have more than 1 pathPattern in the rule then we are recommending to narrow down the rule to improve performance
+        if rule_type == ("Custom" or "Memory" or "Registry") and dynamic_rule.get('pathPattern') != ("*" or None):
+            dynamic_custom_path_pattern = dynamic_rule.get('pathPattern').split("|")
+            if len(dynamic_custom_path_pattern) > 1:
+                recommendation = "It is recommended to narrow down the pathPattern for better performance"
+                report_entry = {
+                    'id': rule_id,
+                    'rule_name': dynamic_rule.get('name', 'Unknown'),
+                    'rule_type': rule_type,
+                    'Impact': 'Low',
+                    'recommendation': recommendation,
+                    'severity': 'Info',
+                    'processPattern': '',
+                    'pathPattern': '',
+                    'file': ''
+                }
+                report.append(report_entry)
+        else:
+            for static_rule in static_rules:
+                # See if the rule in dynamic rules dataset has an entry in static rule dataset
+                match, process_pattern, path_pattern = is_match(dynamic_rule, static_rule, rule_type)
+                if match:
+                    print(dynamic_rule)
+                    print(static_rule)
+                    # Check if the found rule is having behaviour as recommended
+                    conflict_found, recommendation = is_conflict(dynamic_rule, static_rule, rule_type)
 
-                # Append the conflicting rule details to a report
-                if conflict_found:
-                    report_entry = {
-                        'id': rule_id,
-                        'dynamic_rule_name': dynamic_rule.get('name', 'Unknown'),
-                        'rule_type': rule_type,
-                        'Impact': static_rule.get('Impact', 'Unknown'),
-                        'recommendation': recommendation,
-                        'severity': '',
-                    }
-                    if matched_path_process and rule_type in ['Custom', 'Memory', 'Registry']:
-                        report_entry['matched_path_process'] = matched_path_process
-                    else:
-                        report_entry['matched_path_process'] = ''
-                    if rule_type == 'File':
-                        if static_rule.get('fileName'):
-                            report_entry['file'] = static_rule.get('fileName')
-                        if static_rule.get('hash'):
-                            report_entry['file'] = static_rule.get('hash')
-                    else:
-                        report_entry['file'] = ''
+                    # Append the conflicting rule details to a report
+                    if conflict_found:
+                        report_entry = {
+                            'id': rule_id,
+                            'rule_name': dynamic_rule.get('name', 'Unknown'),
+                            'rule_type': rule_type,
+                            'Impact': static_rule.get('Impact', 'Unknown'),
+                            'recommendation': recommendation,
+                            'severity': static_rule.get('Severity', 'Unknown')
+                        }
+                        if rule_type in ['Custom', 'Memory', 'Registry']:
+                            report_entry['processPattern'] = process_pattern
+                            report_entry['pathPattern'] = path_pattern
+                        else:
+                            report_entry['processPattern'] = ''
+                            report_entry['pathPattern'] = ''
+                        if rule_type == 'File':
+                            if static_rule.get('fileName'):
+                                report_entry['file'] = static_rule.get('fileName')
+                            if static_rule.get('hash'):
+                                report_entry['file'] = static_rule.get('hash')
+                        else:
+                            report_entry['file'] = ''
 
-                    report.append(report_entry)
+                        report.append(report_entry)
 
     return report
 

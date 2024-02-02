@@ -3,14 +3,14 @@
     "publisherState":2,
     "recommendation": "This publisher is recommended to be Approved",
     "platformFlags": 1,
-    "Impact": "Medium",
-    "Severity": ""
+    "Impact": "High",
+    "Severity": "Critical"
   },
   {"name":"Microsoft Windows Publisher",
     "publisherState":2,
     "recommendation": "This publisher is recommended to be Approved",
     "platformFlags": 1,
     "Impact": "Medium",
-    "Severity": ""
+    "Severity": "Warning"
   }
 ]

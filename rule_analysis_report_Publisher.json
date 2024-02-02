@@ -1,22 +1,35 @@
 [
     {
         "id": 1,
-        "dynamic_rule_name": "Bit9, Inc.",
+        "rule_name": "Bit9, Inc.",
         "rule_type": "Publisher",
-        "Impact": "Medium",
+        "Impact": "High",
         "recommendation": "This publisher is recommended to be Approved",
-        "severity": "",
-        "matched_path_process": "",
+        "severity": "Critical",
+        "processPattern": "",
+        "pathPattern": "",
         "file": ""
     },
     {
-        "id": 2,
-        "dynamic_rule_name": "Bit9, Inc",
+        "id": 13,
+        "rule_name": "Microsoft Windows",
         "rule_type": "Publisher",
         "Impact": "Medium",
         "recommendation": "This publisher is recommended to be Approved",
-        "severity": "",
-        "matched_path_process": "",
+        "severity": "Warning",
+        "processPattern": "",
+        "pathPattern": "",
+        "file": ""
+    },
+    {
+        "id": 14,
+        "rule_name": "Microsoft Windows Publisher",
+        "rule_type": "Publisher",
+        "Impact": "Medium",
+        "recommendation": "It is recommended not to ban this Publisher",
+        "severity": "Warning",
+        "processPattern": "",
+        "pathPattern": "",
         "file": ""
     }
 ]
