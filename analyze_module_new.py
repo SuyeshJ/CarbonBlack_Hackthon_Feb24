@@ -1,6 +1,7 @@
 import json
 import sys
-import rules_utilities as ra
+import pandas as pd
+from tabulate import tabulate
 
 
 def load_rules(file_path):
@@ -100,20 +101,16 @@ def is_conflict(dynamic_rule, static_rule, rule_type):
 
 def analyze_rules(dynamic_rules, static_rules, rule_type):
     report = []
-    d_count = 0
     for dynamic_rule in dynamic_rules:
-        d_count = d_count+1
-        print("d_count: "+str(d_count))
         rule_id = dynamic_rule.get('id', 'Unknown')
-
-        s_count = 0
         for static_rule in static_rules:
-            s_count = s_count+1
-            print("s_count: "+str(s_count))
+            # See if the rule in dynamic rules dataset has an entry in static rule dataset
             match, matched_path_process = is_match(dynamic_rule, static_rule, rule_type)
             if match:
+                # Check if the found rule is having behaviour as recommended 
                 conflict_found, recommendation = is_conflict(dynamic_rule, static_rule, rule_type)
 
+                # Append the conflicting rule details to a report
                 if conflict_found:
                     report_entry = {
                         'id': rule_id,
@@ -156,6 +153,13 @@ if __name__ == "__main__":
 
     report = analyze_rules(dynamic_rules, static_rules, rule_type)
 
+    # Print report in tabular format on stdout
+    headers = report[0].keys()
+    rows = [x.values() for x in report]
+    # Print the table
+    print(tabulate(rows, headers=headers, tablefmt="grid"))
+
+    # Write the report to a file in json format
     report_file = f'rule_analysis_report_{rule_type}.json'
     with open(report_file, 'w') as file:
         json.dump(report, file, indent=4)
