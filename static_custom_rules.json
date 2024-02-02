@@ -3,25 +3,9 @@
     "processPattern":"Msiexec.exe",
     "execActionMask":129,
     "ruleAction":"Allow execute",
-    "recommendation": "This publisher is recommended to be Unapproved",
+    "recommendation": "Allowing msiexec.exe to run via custom rule will allow any msi to run.",
     "platformFlags": 1,
     "Impact": "Medium",
     "Severity": "Warning"
-  },
-  {
-    "processPattern":"Msiexec.exe",
-    "ruleAction":"Allow execute",
-    "recommendation": "This publisher is recommended to be Blocked",
-    "platformFlags": 1,
-    "Impact": "Medium",
-    "Severity": "Warning"
-  },
-  {
-    "pathPattern":"ntvdm.exe",
-    "ruleAction":"Block execute",
-    "recommendation": "This publisher is recommended to be Blocked",
-    "platformFlags": 1,
-    "Impact": "Low",
-    "Severity": "Info"
   }
 ]

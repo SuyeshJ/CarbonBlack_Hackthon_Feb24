@@ -1,14 +1,14 @@
 [
   {"name":"Bit9, Inc.",
-    "publisherState":2,
-    "recommendation": "This publisher is recommended to be Approved",
+    "publisherState":3,
+    "recommendation": "This publisher is not recommended to be banned",
     "platformFlags": 1,
     "Impact": "High",
     "Severity": "Critical"
   },
   {"name":"Microsoft Windows Publisher",
-    "publisherState":2,
-    "recommendation": "This publisher is recommended to be Approved",
+    "publisherState":3,
+    "recommendation": "This publisher is not recommended to be banned",
     "platformFlags": 1,
     "Impact": "Medium",
     "Severity": "Warning"

@@ -7,18 +7,7 @@
         "recommendation": "It is recommended to narrow down the pathPattern for better performance",
         "severity": "Info",
         "processPattern": "",
-        "pathPattern": "",
-        "file": ""
-    },
-    {
-        "id": 52,
-        "rule_name": "[Sample] Report Changes to Trusted Zones",
-        "rule_type": "Custom",
-        "Impact": "Low",
-        "recommendation": "It is recommended to narrow down the pathPattern for better performance",
-        "severity": "Info",
-        "processPattern": "",
-        "pathPattern": "",
+        "pathPattern": "|*\\software\\microsoft\\internet explorer\\main\\Default_Page_URL|*\\software\\microsoft\\internet explorer\\main\\Default_Search_URL|*\\software\\microsoft\\internet explorer\\main\\start page|*\\software\\microsoft\\internet explorer\\main\\search page|*\\software\\microsoft\\internet explorer\\main\\search bar|*\\software\\microsoft\\internet explorer\\search\\searchassistant|*\\software\\microsoft\\internet explorer\\search\\customizesearch|*\\software\\microsoft\\internet explorer\\searchscopes\\*|*\\software\\microsoft\\internet explorer\\searchurl\\*|*\\software\\microsoft\\internet explorer\\urlsearchhooks\\*",
         "file": ""
     },
     {
@@ -29,7 +18,7 @@
         "recommendation": "It is recommended to narrow down the pathPattern for better performance",
         "severity": "Info",
         "processPattern": "",
-        "pathPattern": "",
+        "pathPattern": "|*\\software\\microsoft\\windows\\currentversion\\policies\\explorer\\run\\*|HKLM\\software\\microsoft\\windows nt\\currentversion\\winlogon\\shell|HKLM\\software\\microsoft\\windows nt\\currentversion\\winlogon\\userinit|HKLM\\software\\microsoft\\windows nt\\currentversion\\windows\\appinit_dlls|HKLM\\system\\*controlset*\\control\\session manager\\appcertdlls|HKCU\\software\\microsoft\\windows nt\\currentversion\\windows\\load|HKCU\\software\\microsoft\\windows nt\\currentversion\\windows\\run|HKLM\\software\\microsoft\\windows nt\\currentversion\\winlogon\\notify\\*|HKLM\\software\\microsoft\\windows\\currentversion\\shellserviceobjectdelayload\\*|HKLM\\software\\microsoft\\windows\\currentversion\\explorer\\sharedtaskscheduler\\*",
         "file": ""
     },
     {
@@ -40,62 +29,7 @@
         "recommendation": "It is recommended to narrow down the pathPattern for better performance",
         "severity": "Info",
         "processPattern": "",
-        "pathPattern": "",
-        "file": ""
-    },
-    {
-        "id": 179,
-        "rule_name": "[Sample] Ignore Puppet master and agent",
-        "rule_type": "Custom",
-        "Impact": "Low",
-        "recommendation": "It is recommended to narrow down the pathPattern for better performance",
-        "severity": "Info",
-        "processPattern": "",
-        "pathPattern": "",
-        "file": ""
-    },
-    {
-        "id": 185,
-        "rule_name": "Ignore Carbon Black EDR Linux Sensor",
-        "rule_type": "Custom",
-        "Impact": "Low",
-        "recommendation": "It is recommended to narrow down the pathPattern for better performance",
-        "severity": "Info",
-        "processPattern": "",
-        "pathPattern": "",
-        "file": ""
-    },
-    {
-        "id": 186,
-        "rule_name": "Ignore Carbon Black EDR Osx Sensor",
-        "rule_type": "Custom",
-        "Impact": "Low",
-        "recommendation": "It is recommended to narrow down the pathPattern for better performance",
-        "severity": "Info",
-        "processPattern": "",
-        "pathPattern": "",
-        "file": ""
-    },
-    {
-        "id": 187,
-        "rule_name": "[Sample] Do not report csc.exe temporary files",
-        "rule_type": "Custom",
-        "Impact": "Low",
-        "recommendation": "It is recommended to narrow down the pathPattern for better performance",
-        "severity": "Info",
-        "processPattern": "",
-        "pathPattern": "",
-        "file": ""
-    },
-    {
-        "id": 197,
-        "rule_name": "Ignore Linux virtual file systems",
-        "rule_type": "Custom",
-        "Impact": "Low",
-        "recommendation": "It is recommended to narrow down the pathPattern for better performance",
-        "severity": "Info",
-        "processPattern": "",
-        "pathPattern": "",
+        "pathPattern": "|HKLM\\software\\microsoft\\windows nt\\currentversion\\image file execution options\\*\\debugger|HKLM\\system\\*controlset*\\services\\netbios\\*|HKLM\\system\\*controlset*\\services\\netbt\\*|HKLM\\system\\*controlset*\\services\\winsock\\*|HKLM\\system\\*controlset*\\services\\winsock2\\*",
         "file": ""
     },
     {
@@ -106,18 +40,7 @@
         "recommendation": "It is recommended to narrow down the pathPattern for better performance",
         "severity": "Info",
         "processPattern": "",
-        "pathPattern": "",
-        "file": ""
-    },
-    {
-        "id": 206,
-        "rule_name": "Ignore Outlook Files",
-        "rule_type": "Custom",
-        "Impact": "Low",
-        "recommendation": "It is recommended to narrow down the pathPattern for better performance",
-        "severity": "Info",
-        "processPattern": "",
-        "pathPattern": "",
+        "pathPattern": "|*.dat|*.ini|*.log|*.txt|*.xml|*.edb|*.db",
         "file": ""
     },
     {
@@ -128,7 +51,7 @@
         "recommendation": "It is recommended to narrow down the pathPattern for better performance",
         "severity": "Info",
         "processPattern": "",
-        "pathPattern": "",
+        "pathPattern": "|<Windows>\\Prefetch\\*|<System>\\Config\\*|<System>\\WinEvt\\*|<System>\\CatRoot*\\*|<System>\\wbem\\repository\\*|<Windows>\\winsxs\\manifests\\*",
         "file": ""
     },
     {
@@ -139,7 +62,7 @@
         "recommendation": "It is recommended to narrow down the pathPattern for better performance",
         "severity": "Info",
         "processPattern": "",
-        "pathPattern": "",
+        "pathPattern": "|<Reg:HKLM-SoftwareX86\\Classes\\CLSID\\{31F45B04-7198-45ED-A13F-F224A4A1686A}\\LocalServer32\\>|<Reg:HKLM-SoftwareX86\\Classes\\CLSID\\{8B10A141-87EE-4A0F-823F-D79F5FF7B10A}\\LocalServer32\\>|<Reg:HKLM-SoftwareX86\\Classes\\CLSID\\{68681A5C-C22A-421d-B68B-5BA9D01F35C5}\\LocalServer32\\>|<Reg:HKLM-SoftwareX86\\Classes\\CLSID\\{7751A556-096C-44B5-B60D-4CC78885F0E5}\\LocalServer32\\>|<Reg:HKLM-SoftwareX86\\Classes\\CLSID\\{059618E6-4639-4D1A-A248-1384E368D5C3}\\LocalServer32\\>|<Reg:HKLM-SoftwareX86\\Classes\\CLSID\\{48AE9D34-2FE7-48A7-9D8A-A65534E3C20C}\\LocalServer32\\>",
         "file": ""
     },
     {
@@ -150,29 +73,7 @@
         "recommendation": "It is recommended to narrow down the pathPattern for better performance",
         "severity": "Info",
         "processPattern": "",
-        "pathPattern": "",
-        "file": ""
-    },
-    {
-        "id": 275,
-        "rule_name": "Mac User Data Files",
-        "rule_type": "Custom",
-        "Impact": "Low",
-        "recommendation": "It is recommended to narrow down the pathPattern for better performance",
-        "severity": "Info",
-        "processPattern": "",
-        "pathPattern": "",
-        "file": ""
-    },
-    {
-        "id": 284,
-        "rule_name": "[Sample] Xcode Promote",
-        "rule_type": "Custom",
-        "Impact": "Low",
-        "recommendation": "It is recommended to narrow down the pathPattern for better performance",
-        "severity": "Info",
-        "processPattern": "",
-        "pathPattern": "",
+        "pathPattern": "|*.obj|*.bsc|*.ilk|*.ncb|*.sbr|*.idb|*.pdb|*.pch|*.manifest|*.res|*.dbx|*.idx|<LocalAppData>\\temp\\_CL_*",
         "file": ""
     },
     {
@@ -183,117 +84,7 @@
         "recommendation": "It is recommended to narrow down the pathPattern for better performance",
         "severity": "Info",
         "processPattern": "",
-        "pathPattern": "",
-        "file": ""
-    },
-    {
-        "id": 288,
-        "rule_name": "SUHelperD",
-        "rule_type": "Custom",
-        "Impact": "Low",
-        "recommendation": "It is recommended to narrow down the pathPattern for better performance",
-        "severity": "Info",
-        "processPattern": "",
-        "pathPattern": "",
-        "file": ""
-    },
-    {
-        "id": 295,
-        "rule_name": "Ignore Bootcamp Volume",
-        "rule_type": "Custom",
-        "Impact": "Low",
-        "recommendation": "It is recommended to narrow down the pathPattern for better performance",
-        "severity": "Info",
-        "processPattern": "",
-        "pathPattern": "",
-        "file": ""
-    },
-    {
-        "id": 296,
-        "rule_name": "Ignore Time Machine Volume",
-        "rule_type": "Custom",
-        "Impact": "Low",
-        "recommendation": "It is recommended to narrow down the pathPattern for better performance",
-        "severity": "Info",
-        "processPattern": "",
-        "pathPattern": "",
-        "file": ""
-    },
-    {
-        "id": 298,
-        "rule_name": "Ignore Installer Trash Cleanup",
-        "rule_type": "Custom",
-        "Impact": "Low",
-        "recommendation": "It is recommended to narrow down the pathPattern for better performance",
-        "severity": "Info",
-        "processPattern": "",
-        "pathPattern": "",
-        "file": ""
-    },
-    {
-        "id": 299,
-        "rule_name": "Deny read-only memory map operations on banned executables by .NET applications",
-        "rule_type": "Custom",
-        "Impact": "Low",
-        "recommendation": "It is recommended to narrow down the pathPattern for better performance",
-        "severity": "Info",
-        "processPattern": "",
-        "pathPattern": "",
-        "file": ""
-    },
-    {
-        "id": 300,
-        "rule_name": "[Sample] Deny read-only memory map operations on unapproved executables by .NET applications in high enforcement",
-        "rule_type": "Custom",
-        "Impact": "Low",
-        "recommendation": "It is recommended to narrow down the pathPattern for better performance",
-        "severity": "Info",
-        "processPattern": "",
-        "pathPattern": "",
-        "file": ""
-    },
-    {
-        "id": 301,
-        "rule_name": "[Sample] Prompt for read-only memory map operations on unapproved executables by .NET applications in medium enforcement",
-        "rule_type": "Custom",
-        "Impact": "Low",
-        "recommendation": "It is recommended to narrow down the pathPattern for better performance",
-        "severity": "Info",
-        "processPattern": "",
-        "pathPattern": "",
-        "file": ""
-    },
-    {
-        "id": 302,
-        "rule_name": "Report read-only memory map operations on unapproved executables by .NET applications",
-        "rule_type": "Custom",
-        "Impact": "Low",
-        "recommendation": "It is recommended to narrow down the pathPattern for better performance",
-        "severity": "Info",
-        "processPattern": "",
-        "pathPattern": "",
-        "file": ""
-    },
-    {
-        "id": 312,
-        "rule_name": "Block powershell scripts that execute memory",
-        "rule_type": "Custom",
-        "Impact": "Low",
-        "recommendation": "It is recommended to narrow down the pathPattern for better performance",
-        "severity": "Info",
-        "processPattern": "",
-        "pathPattern": "",
-        "file": ""
-    },
-    {
-        "id": 316,
-        "rule_name": "Ignore system log files",
-        "rule_type": "Custom",
-        "Impact": "Low",
-        "recommendation": "It is recommended to narrow down the pathPattern for better performance",
-        "severity": "Info",
-        "processPattern": "",
-        "pathPattern": "",
+        "pathPattern": "|*.o|*.d|*.dat|*.dep|*.hmap|*.LinkFileList",
         "file": ""
     },
     {
@@ -305,28 +96,6 @@
         "severity": "Warning",
         "processPattern": "msiexec.exe",
         "pathPattern": null,
-        "file": ""
-    },
-    {
-        "id": 1089,
-        "rule_name": "msiexec",
-        "rule_type": "Custom",
-        "Impact": "Medium",
-        "recommendation": "It is recommended for ruleAction to be Allow execute",
-        "severity": "Warning",
-        "processPattern": "msiexec.exe",
-        "pathPattern": null,
-        "file": ""
-    },
-    {
-        "id": 1090,
-        "rule_name": "multipath",
-        "rule_type": "Custom",
-        "Impact": "Low",
-        "recommendation": "It is recommended to narrow down the pathPattern for better performance",
-        "severity": "Info",
-        "processPattern": "",
-        "pathPattern": "",
         "file": ""
     }
 ]
