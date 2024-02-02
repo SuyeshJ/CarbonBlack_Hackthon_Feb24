@@ -1,7 +1,7 @@
 import json
 import sys
-import pandas as pd
 from tabulate import tabulate
+import textwrap
 
 
 def load_rules(file_path):
@@ -120,7 +120,7 @@ def analyze_rules(dynamic_rules, static_rules, rule_type):
                     'recommendation': recommendation,
                     'severity': 'Info',
                     'processPattern': '',
-                    'pathPattern': '',
+                    'pathPattern': dynamic_rule.get('pathPattern'),
                     'file': ''
                 }
                 report.append(report_entry)
@@ -129,8 +129,6 @@ def analyze_rules(dynamic_rules, static_rules, rule_type):
                 # See if the rule in dynamic rules dataset has an entry in static rule dataset
                 match, process_pattern, path_pattern = is_match(dynamic_rule, static_rule, rule_type)
                 if match:
-                    print(dynamic_rule)
-                    print(static_rule)
                     # Check if the found rule is having behaviour as recommended
                     conflict_found, recommendation = is_conflict(dynamic_rule, static_rule, rule_type)
 
@@ -163,6 +161,30 @@ def analyze_rules(dynamic_rules, static_rules, rule_type):
     return report
 
 
+def wrap_text(text, width):
+    """
+    Wraps text to the specified width.
+    :param text: The text to wrap.
+    :param width: The maximum width of the text.
+    :return: A wrapped text.
+    """
+    return '\n'.join(textwrap.wrap(text, width=width))
+
+
+def wrap_table_data(table_data, max_width):
+    """
+    Wraps the elements of a table's data to ensure that no cell exceeds the maximum width.
+    :param table_data: The table data, a list of dictionaries.
+    :param max_width: The maximum width for any cell.
+    :return: The wrapped table data.
+    """
+    wrapped_data = []
+    for row in table_data:
+        wrapped_row = {key: wrap_text(str(value), max_width) for key, value in row.items()}
+        wrapped_data.append(wrapped_row)
+    return wrapped_data
+
+
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: python script.py <rule_type>")
@@ -179,11 +201,17 @@ if __name__ == "__main__":
 
     report = analyze_rules(dynamic_rules, static_rules, rule_type)
 
+    # Wrap data
+    max_width = 40  # Set your desired max width
+    wrapped_data = wrap_table_data(report, max_width)
+
+    # Print table
+    print(tabulate(wrapped_data, headers="keys", tablefmt="grid"))
     # Print report in tabular format on stdout
-    headers = report[0].keys()
-    rows = [x.values() for x in report]
+    #headers = report[0].keys()
+    #rows = [x.values() for x in report]
     # Print the table
-    print(tabulate(rows, headers=headers, tablefmt="grid"))
+    #print(tabulate(rows, headers=headers, tablefmt="grid"))
 
     # Write the report to a file in json format
     report_file = f'rule_analysis_report_{rule_type}.json'
